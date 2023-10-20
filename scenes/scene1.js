@@ -36,9 +36,10 @@ const stepTwo = Telegraf.on('text', async ctx => {
 const result = Telegraf.on('text', async ctx => {
   try {
     ctx.wizard.state.data.secondParam = ctx.message.text;
+    const { firsParam, secondParam } = ctx.wizard.state.data;
     // ...
     // тут должна быть обработка полученных данных и вывод
-    await ctx.reply(`Результат: ${ctx.wizard.state.data.firsParam + ctx.wizard.state.data.secondParam}`, {
+    await ctx.reply(`Результат: ${+firsParam + +secondParam}`, {
       ...mainMenu
   })
     return ctx.scene.leave()
@@ -64,4 +65,4 @@ menuSceneOne.hears('Возврат в меню', ctx => {
 // экспортируем сцену
 module.exports = {
   menuSceneOne
-}; 
+};
